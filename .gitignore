@@ -1,0 +1,8 @@
+node_modules/
+logs/
+package-lock.json
+
+uploads/*
+.env
+.env.development
+.env.production

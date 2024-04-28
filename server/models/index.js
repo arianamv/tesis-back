@@ -1,0 +1,20 @@
+module.exports = {
+    User: require('./usuario/usuario.model'),
+    Competencia: require('./competencia/competencia.model'),
+    CicloAcademico: require('./medicion/cicloacademico.model'),
+    Medicion: require('./medicion/medicion.model'),
+    EspacioMedicion: require('./medicion/espaciomedicion.model'),
+    MuestraMedicion: require('./medicion/muestramedicion.model'),
+    Cuenta: require('./cuenta/cuenta.model'),
+    Indicador: require('./competencia/indicador.model'),
+    Rubrica: require('./competencia/rubrica.model'),
+    Alumnos: require('./medicion/alumnos.model'),
+    PlanMejora: require('./planMejora/planmejora.model'),
+    Propuesta: require('./planMejora/propuesta.model'),
+    Actividad: require('./planMejora/actividad.model'),
+    ObjetivoEducacional: require('./competencia/objetivoeducacional.model'),
+    Reportes: require('./combobox/reportes.model'),
+    Facultad: require('./usuario/facultad.model'),
+    Especialidad: require('./usuario/especialidad.model'),
+    Perfil: require('./usuario/perifl.model')
+}
