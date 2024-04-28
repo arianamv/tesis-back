@@ -1,9 +1,3 @@
-/*import passport from 'passport';
-import {
-  Profile,
-  Strategy as GoogleStrategy,
-  VerifyCallback,
-} from 'passport-google-oauth20';*/
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 require('dotenv').config({
