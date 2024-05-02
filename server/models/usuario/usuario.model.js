@@ -1,45 +1,27 @@
 const getConnection = require('../../config/database');
-const logger = require('../../config/winston');
 require('dotenv').config({
     path: process.env.NODE_ENV === 'production' 
           ? __dirname + '/../../.env.production' 
           : __dirname + '/../../.env.development'
 });
 
-const Usuario = function (idUsuario, codigoPUCP, apellidoPaterno, apellidoMaterno, nombres, correo, correo2, celular, contrasenia, usuarioCreacion, rutaFoto) {
+const Usuario = function (idUsuario, apellidoPat, apellidoMat, nombres, email, telefono, contrasenia, estado) {
     this.idUsuario = idUsuario;
-    this.codigoPUCP = codigoPUCP;
-    this.apellidoPaterno = apellidoPaterno;
-    this.apellidoMaterno = apellidoMaterno;
+    this.apellidoPat = apellidoPat;
+    this.apellidoMat = apellidoMat;
     this.nombres = nombres;
-    this.correo = correo;
-    this.correo2 = correo2;
+    this.email = email;
     this.contrasenia = contrasenia;
-    this.celular = celular;
-    this.activo = 1;
-    this.usuarioCreacion = usuarioCreacion;
-    this.rutaFoto = rutaFoto;
-    this.perfiles = [];
+    this.telefono = telefono;
+    this.estado = 1;
 }
 
 
 Usuario.listarUsuario = (usuario, result) => {
-    if (/%/.test(usuario.body.nombre_id)) {
-        console.log("La cadena contiene el carácter '%'.");
-        result(null)
-        return;
-    } 
     const connection = getConnection.getConnection();
-    var sql = "CALL ListarUsuario(?)";
-    var value = [
-        usuario.body.nombre_id
-    ];
-    connection.query(sql, value, (error, results) => {
-        if (error) {
-            logger.log('error', 'No se pudo listar usuarios');
-            result(error, null);
-            return;
-        }
+    var sql = "CALL listarUsuarios";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
         result(null, results[0])
         return;
     });

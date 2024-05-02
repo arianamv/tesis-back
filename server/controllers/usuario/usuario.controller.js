@@ -1,7 +1,6 @@
 const getConnection = require('../../config/database');
 const db = require('../../models/index');
 const jwt = require('jsonwebtoken');
-const logger  = require( '../../config/winston');
 
 
 
@@ -31,7 +30,7 @@ exports.usuarioListar = async (req, res) => {
             }); 
     }) 
     } catch (errorTRY) {
-        logger.log('error',errorTRY.message);
+        console.log(errorTRY)
         res.json({
             success: false,
             error: {

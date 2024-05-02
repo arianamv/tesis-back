@@ -4,6 +4,6 @@ var usuarioController = require('../../controllers/usuario/usuario.controller');
 var passport = require('passport');
 var pagination = require('../../middlewares/pagination')
 
-usuarioRouter.post('/listarUsuario', usuarioController.usuarioListar); //
+usuarioRouter.get('/listarUsuario', usuarioController.usuarioListar); //
 
 module.exports = usuarioRouter;
