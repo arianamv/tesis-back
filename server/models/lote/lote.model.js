@@ -6,12 +6,16 @@ require('dotenv').config({
           : __dirname + '/../../.env.development'
 });
 
-const Lote = function (idLote, nombreLote, descripcion, idFundo, estado) {
+const Lote = function (idLote, nombreLote, descripcion, idFundo, estado, latitud, longitud) {
     this.idLote = idLote;
     this.nombreLote = nombreLote;
     this.descripcion = descripcion;
     this.idFundo = idFundo;
     this.estado = estado;
+    this.coordenadas = {
+        latitud: latitud,
+        lontgitud: longitud,
+    }
 }
 
 
@@ -33,7 +37,7 @@ Lote.listarLoteXFundo = (lote, result) => {
     } 
     const connection = getConnection.getConnection();
     console.log(lote.body)
-    var sql = "CALL listarLoteXFundo(?)";
+    var sql = "CALL listarLotesXFundo(?)";
     var value = [
         lote.body.nombre_id
     ];
