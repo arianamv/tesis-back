@@ -24,5 +24,46 @@ Lote.listarLote = (lote, result) => {
     });
 }
 
+Lote.listarLoteXFundo = (lote, result) => {
+    if (/%/.test(lote.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
+    const connection = getConnection.getConnection();
+    console.log(lote.body)
+    var sql = "CALL listarLoteXFundo(?)";
+    var value = [
+        lote.body.nombre_id
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
+Lote.listarLotesCoord = (lote, result) => {
+    if (/%/.test(lote.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarLotesCoord(?)";
+    var value = [
+        lote.body.nombre_id
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) {
+            logger.log('error', 'No se pudo listar lotes');
+            result(error, null);
+            return;
+        }
+        result(null, results[0])
+        return;
+    });
+}
+
 
 module.exports = Lote;

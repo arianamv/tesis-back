@@ -12,12 +12,15 @@ var corsOpcion = {
     exposeHeaders: ['Content-Disposition']
 }
 app.use(cors(corsOpcion));
+app.use(express.json());
 
 
 var port = normalizePort(process.env.APP_PORT || '3050');
 app.set('port', port);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+
 
 app.use(morgan('dev'));
 

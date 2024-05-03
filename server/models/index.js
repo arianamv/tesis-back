@@ -6,4 +6,5 @@ module.exports = {
     Lote: require('./lote/lote.model'),
     Pesticida: require('./pesticida/pesticida.model'),
     Plaga: require('./plaga/plaga.model'),
+    Coordenada: require('./coordenada/coordenada.model'),
 }
