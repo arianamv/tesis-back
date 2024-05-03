@@ -5,5 +5,6 @@ var passport = require('passport');
 var pagination = require('../../middlewares/pagination')
 
 fundoRouter.post('/getFundo', fundoController.fundoGet); //
+fundoRouter.get('/listarFundo', fundoController.fundoListar);
 
 module.exports = fundoRouter;

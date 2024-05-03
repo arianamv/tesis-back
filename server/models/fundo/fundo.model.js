@@ -35,5 +35,16 @@ Fundo.getFundo = (fundo, result) => {
     });
 }
 
+Fundo.listarFundo = (fundo, result) => {
+    const connection = getConnection.getConnection();
+    console.log(fundo.body)
+    var sql = "CALL listarFundos";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
 
 module.exports = Fundo;
