@@ -4,6 +4,6 @@ var coordenadaController = require('../../controllers/coordenada/coordenada.cont
 var passport = require('passport');
 var pagination = require('../../middlewares/pagination')
 
-coordenadaRouter.post('/listarCoordenadaXLote', coordenadaController.coordenadaXLoteListar); //
+coordenadaRouter.post('/listarCoordenadaXLote', pagination(10), coordenadaController.coordenadaXLoteListar); //
 
 module.exports = coordenadaRouter;

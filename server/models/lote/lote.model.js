@@ -1,4 +1,5 @@
 const getConnection = require('../../config/database');
+const { listarCoordenadaXLote } = require('../coordenada/coordenada.model');
 require('dotenv').config({
     path: process.env.NODE_ENV === 'production' 
           ? __dirname + '/../../.env.production' 
@@ -39,7 +40,6 @@ Lote.listarLoteXFundo = (lote, result) => {
     connection.query(sql, value, (error, results) => {
         if (error) throw error;
         result(null, results[0])
-        return;
     });
 }
 
