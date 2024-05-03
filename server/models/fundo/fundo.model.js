@@ -16,10 +16,19 @@ const Fundo = function (idFundo, nombreFundo, descripcion, totalHectareas, longi
 }
 
 
-Fundo.listarFundo = (fundo, result) => {
+Fundo.getFundo = (fundo, result) => {
+    if (/%/.test(fundo.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
     const connection = getConnection.getConnection();
-    var sql = "CALL listarFundos";
-    connection.query(sql, (error, results) => {
+    console.log(fundo.body)
+    var sql = "CALL fundoGet(?)";
+    var value = [
+        fundo.body.nombre_id
+    ];
+    connection.query(sql, value, (error, results) => {
         if (error) throw error;
         result(null, results[0])
         return;

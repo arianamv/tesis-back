@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken');
 
 
 
-exports.fundoListar = async (req, res) => {
+exports.fundoGet = async (req, res) => {
     try {
-    db.Fundo.listarFundo(req,(err,data)=>{
+    db.Fundo.getFundo(req,(err,data)=>{
             if(err){
                 res.json({
                     success: false,
