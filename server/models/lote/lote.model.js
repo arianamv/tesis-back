@@ -47,6 +47,25 @@ Lote.listarLoteXFundo = (lote, result) => {
     });
 }
 
+Lote.listarLotesXCampañaXFundo = (lote, result) => {
+    if (/%/.test(lote.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
+    const connection = getConnection.getConnection();
+    console.log(lote.body)
+    var sql = "CALL listarLotesXCampañaXFundo(?,?)";
+    var value = [
+        lote.body.idFundo,
+        lote.body.idCampania
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+    });
+}
+
 Lote.listarLotesCoord = (lote, result) => {
     if (/%/.test(lote.body.nombre_id)) {
         console.log("La cadena contiene el carácter '%'.");

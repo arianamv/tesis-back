@@ -7,5 +7,6 @@ var pagination = require('../../middlewares/pagination')
 loteRouter.get('/listarLote', loteController.loteListar); //
 loteRouter.post('/listarLotesCoord', loteController.lotesCoordListar);
 loteRouter.post('/listarLoteXFundo', loteController.loteXFundoListar);
+loteRouter.post('/listarLotesXCampaniaXFundo', loteController.lotesXCampañaXFundoListar);
 
 module.exports = loteRouter;
