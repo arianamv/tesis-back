@@ -25,5 +25,15 @@ Campaña.listarCampaña = (campaña, result) => {
     });
 }
 
+Campaña.listarCampañaXCultivo = (campaña, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarCampañaXCultivo";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
 
 module.exports = Campaña;
