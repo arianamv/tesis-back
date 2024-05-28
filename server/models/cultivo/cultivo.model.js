@@ -23,5 +23,23 @@ Cultivo.listarCultivo = (cultivo, result) => {
     });
 }
 
+Cultivo.listarVariedadesXCultivo = (cultivo, result) => {
+    if (/%/.test(cultivo.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
+    const connection = getConnection.getConnection();
+    console.log(cultivo.body)
+    var sql = "CALL listarVariedadesXCultivo(?)";
+    var value = [
+        cultivo.body.nombre_id
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+    });
+}
+
 
 module.exports = Cultivo;
