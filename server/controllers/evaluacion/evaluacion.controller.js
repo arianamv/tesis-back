@@ -4,9 +4,9 @@ const jwt = require('jsonwebtoken');
 
 
 
-exports.pesticidaListar = async (req, res) => {
+exports.evaluacionesXSemanaListar = async (req, res) => {
     try {
-    db.Pesticida.listarPesticida(req,(err,data)=>{
+    db.Evaluacion.listarEvaluacionesXSemana(req,(err,data)=>{
             if(err){
                 res.json({
                     success: false,
@@ -20,13 +20,13 @@ exports.pesticidaListar = async (req, res) => {
             if(data==null){
                 res.json({
                     success: false,
-                    Pesticida: [],
+                    Evaluacion: [],
                 }); 
                 return;
             }
             res.json({
                 success: true,
-                Pesticida: data,
+                Evaluacion: data,
             }); 
     }) 
     } catch (errorTRY) {
@@ -41,9 +41,9 @@ exports.pesticidaListar = async (req, res) => {
     }
 }
 
-exports.metodosAplicacionListar = async (req, res) => {
+exports.evaluacionesListar = async (req, res) => {
     try {
-    db.Pesticida.listarMetodosAplicacion(req,(err,data)=>{
+    db.Evaluacion.listarEvaluaciones(req,(err,data)=>{
             if(err){
                 res.json({
                     success: false,
@@ -57,13 +57,50 @@ exports.metodosAplicacionListar = async (req, res) => {
             if(data==null){
                 res.json({
                     success: false,
-                    Pesticida: [],
+                    Evaluacion: [],
                 }); 
                 return;
             }
             res.json({
                 success: true,
-                Pesticida: data,
+                Evaluacion: data,
+            }); 
+    }) 
+    } catch (errorTRY) {
+        console.log(errorTRY)
+        res.json({
+            success: false,
+            error: {
+                "message": "Error en el servidor"
+            },
+            "message": "Error en el servidor"
+        });
+    }
+}
+
+exports.semanasListar = async (req, res) => {
+    try {
+    db.Evaluacion.listarSemanas(req,(err,data)=>{
+            if(err){
+                res.json({
+                    success: false,
+                    error: {
+                        "message": err.message
+                    }
+                });
+                return;
+            }
+            console.log(data);
+            if(data==null){
+                res.json({
+                    success: false,
+                    Evaluacion: [],
+                }); 
+                return;
+            }
+            res.json({
+                success: true,
+                Evaluacion: data,
             }); 
     }) 
     } catch (errorTRY) {

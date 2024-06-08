@@ -5,5 +5,6 @@ var passport = require('passport');
 var pagination = require('../../middlewares/pagination')
 
 pesticidaRouter.get('/listarPesticida', pesticidaController.pesticidaListar); //
+pesticidaRouter.get('/listarMetodosAplicacion', pesticidaController.metodosAplicacionListar);
 
 module.exports = pesticidaRouter;

@@ -30,5 +30,15 @@ Pesticida.listarPesticida = (pesticida, result) => {
     });
 }
 
+Pesticida.listarMetodosAplicacion = (pesticida, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarMetodosAplicacion";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
 
 module.exports = Pesticida;

@@ -6,5 +6,6 @@ var pagination = require('../../middlewares/pagination')
 
 campañaRouter.get('/listarCampania', campañaController.campañaListar); //
 campañaRouter.get('/listarCampaniaXCultivo', campañaController.campañaXCultivoListar); //
+campañaRouter.get('/insertarCampania', campañaController.campañaInsertar); //
 
 module.exports = campañaRouter;

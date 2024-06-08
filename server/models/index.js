@@ -7,4 +7,5 @@ module.exports = {
     Pesticida: require('./pesticida/pesticida.model'),
     Plaga: require('./plaga/plaga.model'),
     Coordenada: require('./coordenada/coordenada.model'),
+    Evaluacion: require('./evaluacion/evaluacion.model'),
 }
