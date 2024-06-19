@@ -4,8 +4,10 @@ var evaluacionController = require('../../controllers/evaluacion/evaluacion.cont
 var passport = require('passport');
 var pagination = require('../../middlewares/pagination')
 
-evaluacionRouter.get('/listarEvaluacionesXSemana', evaluacionController.evaluacionesXSemanaListar); //
+evaluacionRouter.post('/listarEvaluacionesXSemana', evaluacionController.evaluacionesXSemanaListar); //
 evaluacionRouter.get('/listarEvaluaciones', evaluacionController.evaluacionesListar);
 evaluacionRouter.get('/listarSemanas', evaluacionController.semanasListar);
+evaluacionRouter.get('/listarGravedades', evaluacionController.gravedadesListar);
+evaluacionRouter.post('/listarPlagasActivas', evaluacionController.plagasActivasListar);
 
 module.exports = evaluacionRouter;

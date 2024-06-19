@@ -54,4 +54,34 @@ Evaluacion.listarSemanas = (evaluacion, result) => {
     });
 }
 
+Evaluacion.listarGravedades = (evaluacion, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarGravedades";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
+Evaluacion.listarPlagasActivas = (evaluacion, result) => {
+    if (/%/.test(evaluacion.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
+    const connection = getConnection.getConnection();
+    console.log(evaluacion.body)
+    var sql = "CALL listarPlagasActivas(?)";
+    var value = [
+        evaluacion.body.nombre_id
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+    });
+}
+
+
+
 module.exports = Evaluacion;

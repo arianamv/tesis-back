@@ -8,4 +8,5 @@ module.exports = {
     Plaga: require('./plaga/plaga.model'),
     Coordenada: require('./coordenada/coordenada.model'),
     Evaluacion: require('./evaluacion/evaluacion.model'),
+    Aplicacion: require('./aplicacion/aplicacion.model')
 }

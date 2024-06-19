@@ -39,4 +39,14 @@ Usuario.listarEvaluadores = (usuario, result) => {
     });
 }
 
+Usuario.listarUsuarioXFundo = (usuario, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarUsuarioXFundo";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
 module.exports = Usuario;

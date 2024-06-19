@@ -30,6 +30,16 @@ Pesticida.listarPesticida = (pesticida, result) => {
     });
 }
 
+Pesticida.listarPesticidaXPlaga = (pesticida, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarPesticidaXPlaga";
+    connection.query(sql, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+}
+
 Pesticida.listarMetodosAplicacion = (pesticida, result) => {
     const connection = getConnection.getConnection();
     var sql = "CALL listarMetodosAplicacion";
@@ -37,6 +47,22 @@ Pesticida.listarMetodosAplicacion = (pesticida, result) => {
         if (error) throw error;
         result(null, results[0])
         return;
+    });
+}
+
+Pesticida.listarMejoresPesticidas = (pesticida, result) => {
+    const connection = getConnection.getConnection();
+    console.log(pesticida.body)
+    var sql = "CALL listarMejoresPesticidas(?,?,?,?)";
+    var value = [
+        pesticida.body.idPlaga,
+        pesticida.body.idCultivo,
+        pesticida.body.fechaEvaluacion,
+        pesticida.body.fechaCosecha,
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
     });
 }
 
