@@ -31,19 +31,25 @@ Plaga.insertarPlaga = (plaga, result) => {
         plaga.cantLeve,
         plaga.estado,
     ];
-    connection.query(sql, value, function (error, results) {
+    connection.query(sql, value, (error, results) => {
         if (error) {
-            logger.log('error', 'No se pudo realizar la inserción de plaga');
+            console.error("Error executing query: ", error);  // Log the error
             result(error, null);
             return;
         }
-
-    })
+        
+        if (results && results[0] && results[0][0]) {
+            result(null, results[0][0].idEvaluacion);
+        } else {
+            console.error("Unexpected query result: ", results);  // Log unexpected result
+            result(new Error("Unexpected query result"), null);
+        }
+    });
 }
 
 Plaga.modificarPlaga = (plaga, result) => {
     const connection = getConnection.getConnection();
-    var sql = 'CALL modificarPlaga(?,?,?,?,?,?,?,?,?)';
+    var sql = "CALL modificarPlaga(?,?,?,?,?,?,?,?,?)";
     var value = [
         plaga.idPlaga,
         plaga.nombrePlaga,
@@ -55,14 +61,15 @@ Plaga.modificarPlaga = (plaga, result) => {
         plaga.cantLeve,
         plaga.estado,
     ];
+    console.log(value);
     connection.query(sql, value, function (error, results) {
         if (error) {
-            logger.log('error', 'No se pudo realizar la modificación de plaga');
+            console.error("Error in query: ", error);
             result(error, null);
             return;
         }
-
-    })
+        result(null, results);
+    });
 }
 
 Plaga.eliminarPlaga = (plaga, result) => {
@@ -73,12 +80,12 @@ Plaga.eliminarPlaga = (plaga, result) => {
     ];
     connection.query(sql, value, function (error, results) {
         if (error) {
-            logger.log('error', 'No se pudo realizar la eliminación de plaga');
+            console.error("Error in query: ", error);
             result(error, null);
             return;
         }
-
-    })
+        result(null, results);
+    });
 }
 
 Plaga.listarPlaga = (plaga, result) => {

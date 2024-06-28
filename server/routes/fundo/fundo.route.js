@@ -6,5 +6,8 @@ var pagination = require('../../middlewares/pagination')
 
 fundoRouter.post('/getFundo', fundoController.fundoGet); //
 fundoRouter.get('/listarFundo', fundoController.fundoListar);
+fundoRouter.post('/insertarFundo', fundoController.fundoInsertar); //
+fundoRouter.post('/modificarFundo', fundoController.fundoModificar); //
+fundoRouter.post('/eliminarFundo', fundoController.fundoEliminar); //
 
 module.exports = fundoRouter;

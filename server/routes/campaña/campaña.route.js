@@ -6,11 +6,10 @@ var pagination = require('../../middlewares/pagination')
 
 campañaRouter.get('/listarCampania', campañaController.campañaListar); //
 campañaRouter.get('/listarCampaniaXCultivo', campañaController.campañaXCultivoListar); //
+campañaRouter.post('/listarCampaniaXFundo', campañaController.campañaXFundoListar); //
 campañaRouter.post('/insertarCampania', campañaController.campañaInsertar); //
-campañaRouter.post('/insertarCampaniaXCultivo', campañaController.campañaXCultivoInsertar); //
 campañaRouter.post('/modificarCampania', campañaController.campañaModificar); //
-campañaRouter.post('/modificarCampaniaXCultivo', campañaController.campañaXCultivoModificar); //
 campañaRouter.post('/eliminarCampania', campañaController.campañaEliminar); //
-campañaRouter.post('/eliminarCampaniaXCultivo', campañaController.campañaXCultivoEliminar); //
+campañaRouter.post('/getCampaniaXLote', campañaController.campañaXLoteGet); //
 
 module.exports = campañaRouter;

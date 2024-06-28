@@ -15,6 +15,76 @@ const Fundo = function (idFundo, nombreFundo, descripcion, totalHectareas, longi
     this.estado = estado;
 }
 
+Fundo.insertarFundo = (fundo, result) => {
+    const connection = getConnection.getConnection();
+
+    var sql = 'CALL insertarFundo(?,?,?,?,?,?)';
+    var value = [
+        fundo.nombreFundo,
+        fundo.descripcion,
+        fundo.totalHectareas,
+        fundo.longitud,
+        fundo.latitud,
+        fundo.estado
+    ];
+
+    connection.query(sql, value, (error, results) => {
+        if (error) {
+            console.error("Error executing query: ", error);  // Log the error
+            result(error, null);
+            return;
+        }
+        
+        if (results && results[0] && results[0][0]) {
+            result(null, results[0][0].idEvaluacion);
+        } else {
+            console.error("Unexpected query result: ", results);  // Log unexpected result
+            result(new Error("Unexpected query result"), null);
+        }
+    });
+};
+
+Fundo.modificarFundo = (fundo, result) => {
+    const connection = getConnection.getConnection();
+
+    var sql = 'CALL modificarFundo(?,?,?,?,?,?,?)';
+    var value = [
+        fundo.idFundo,
+        fundo.nombreFundo,
+        fundo.descripcion,
+        fundo.totalHectareas,
+        fundo.longitud,
+        fundo.latitud,
+        fundo.estado
+    ];
+
+    connection.query(sql, value, function (error, results) {
+        if (error) {
+            console.error("Error in query: ", error);
+            result(error, null);
+            return;
+        }
+        result(null, results);
+    });
+};
+
+Fundo.eliminarFundo = (fundo, result) => {
+    const connection = getConnection.getConnection();
+
+    var sql = 'CALL eliminarFundo(?)';
+    var value = [
+        fundo.idFundo,
+    ];
+
+    connection.query(sql, value, function (error, results) {
+        if (error) {
+            console.error("Error in query: ", error);
+            result(error, null);
+            return;
+        }
+        result(null, results);
+    });
+};
 
 Fundo.getFundo = (fundo, result) => {
     if (/%/.test(fundo.body.nombre_id)) {

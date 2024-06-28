@@ -5,20 +5,86 @@ require('dotenv').config({
           : __dirname + '/../../.env.development'
 });
 
-const Pesticida = function (idPesticida, nombrePesticida, descripcion, material, dosisRec, unidadRec, periodoCarencia, periodoReingreso, recomendaciones, metodoAplicacion, estado) {
+const Pesticida = function (idPesticida, nombrePeticida, descripcion, material, recomendaciones, metodoAplicacion, toxicidad, estado, plagas) {
     this.idPesticida = idPesticida;
-    this.nombrePesticida = nombrePesticida;
+    this.nombrePeticida = nombrePeticida;
     this.descripcion = descripcion;
     this.material = material;
-    this.dosisRec = dosisRec;
-    this.unidadRec = unidadRec;
-    this.periodoCarencia = periodoCarencia;
-    this.periodoReingreso = periodoReingreso;
     this.recomendaciones = recomendaciones;
     this.metodoAplicacion = metodoAplicacion;
+    this.toxicidad = toxicidad;
     this.estado = estado;
+    this.plagas = plagas;
 }
 
+Pesticida.insertarPesticida = (pesticida, result) => {
+    const connection = getConnection.getConnection();
+    var sql = 'CALL insertarPesticida(?,?,?,?,?,?,?,?)';
+    var value = [
+        pesticida.nombrePeticida,
+        pesticida.descripcion,
+        pesticida.material,
+        pesticida.recomendaciones,
+        pesticida.metodoAplicacion,
+        pesticida.toxicidad,
+        pesticida.estado,
+        JSON.stringify(pesticida.plagas)
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) {
+            console.error("Error executing query: ", error);  // Log the error
+            result(error, null);
+            return;
+        }
+        
+        if (results && results[0] && results[0][0]) {
+            result(null, results[0][0].idCampaña);
+        } else {
+            console.error("Unexpected query result: ", results);  // Log unexpected result
+            result(new Error("Unexpected query result"), null);
+        }
+    });
+}
+
+Pesticida.modificarPesticida = (pesticida, result) => {
+    const connection = getConnection.getConnection();
+    var sql = 'CALL modificarPesticida(?,?,?,?,?,?,?,?,?)';
+    var value = [
+        pesticida.idPesticida,
+        pesticida.nombrePeticida,
+        pesticida.descripcion,
+        pesticida.material,
+        pesticida.recomendaciones,
+        pesticida.metodoAplicacion,
+        pesticida.toxicidad,
+        pesticida.estado,
+        JSON.stringify(pesticida.plagas)
+    ];
+    connection.query(sql, value, function (error, results) {
+        if (error) {
+            console.error("Error in query: ", error);
+            result(error, null);
+            return;
+        }
+        result(null, results);
+    });
+} 
+
+Pesticida.eliminarPesticida = (pesticida, result) => {
+    const connection = getConnection.getConnection();
+    var sql = 'CALL eliminarPesticida(?)';
+    var value = [
+        pesticida.idPesticida
+    ];
+    connection.query(sql, value, function (error, results) {
+        if (error) {
+            console.error("Error in query: ", error);
+            result(error, null);
+            return;
+        }
+        result(null, results);
+    });
+}
 
 Pesticida.listarPesticida = (pesticida, result) => {
     const connection = getConnection.getConnection();

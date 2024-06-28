@@ -7,5 +7,10 @@ var pagination = require('../../middlewares/pagination')
 usuarioRouter.get('/listarUsuario', usuarioController.usuarioListar); //
 usuarioRouter.get('/listarUsuarioXFundo', usuarioController.usuariosXFundoListar); //
 usuarioRouter.get('/listarEvaluadores', usuarioController.evaluadoresListar); //
+usuarioRouter.post('/insertarUsuario', usuarioController.usuarioInsertar); //
+usuarioRouter.post('/modificarUsuario', usuarioController.usuarioModificar); //
+usuarioRouter.post('/eliminarUsuario', usuarioController.usuarioEliminar); //
+
+
 
 module.exports = usuarioRouter;

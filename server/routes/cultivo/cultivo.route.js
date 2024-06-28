@@ -5,6 +5,7 @@ var passport = require('passport');
 var pagination = require('../../middlewares/pagination')
 
 cultivoRouter.get('/listarCultivo', cultivoController.cultivoListar); //
+cultivoRouter.get('/listarVariedades', cultivoController.variedadesListar); //
 cultivoRouter.post('/listarVariedadesXCultivo', cultivoController.variedadesXCultivoListar); //
 
 module.exports = cultivoRouter;

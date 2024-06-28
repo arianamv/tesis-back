@@ -5,17 +5,92 @@ require('dotenv').config({
           : __dirname + '/../../.env.development'
 });
 
-const Usuario = function (idUsuario, apellidoPat, apellidoMat, nombres, email, telefono, contrasenia, estado) {
+const Usuario = function (idUsuario, nombres, apellidoPat, apellidoMat, dni, email, telefono, contrasenia, Perfil_idPerfil, estado, fundos) {
     this.idUsuario = idUsuario;
+    this.nombres = nombres;
     this.apellidoPat = apellidoPat;
     this.apellidoMat = apellidoMat;
-    this.nombres = nombres;
+    this.dni = dni;
     this.email = email;
-    this.contrasenia = contrasenia;
     this.telefono = telefono;
+    this.contrasenia = contrasenia;
+    this.Perfil_idPerfil = Perfil_idPerfil;
     this.estado = 1;
+    this.fundos = fundos;
 }
 
+Usuario.insertarUsuario = (usuario, result) => {
+    const connection = getConnection.getConnection();
+    var sql = 'CALL insertarUsuario(?,?,?,?,?,?,?,?,?,?)';
+    var value = [
+        usuario.nombres,
+        usuario.apellidoPat,
+        usuario.apellidoMat,
+        usuario.dni,
+        usuario.email,
+        usuario.telefono,
+        usuario.contrasenia,
+        usuario.Perfil_idPerfil,
+        usuario.estado,
+        JSON.stringify(usuario.fundos)
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) {
+            console.error("Error executing query: ", error);  // Log the error
+            result(error, null);
+            return;
+        }
+        
+        if (results && results[0] && results[0][0]) {
+            result(null, results[0][0].idCampaña);
+        } else {
+            console.error("Unexpected query result: ", results);  // Log unexpected result
+            result(new Error("Unexpected query result"), null);
+        }
+    });
+}
+
+Usuario.modificarUsuario = (usuario, result) => {
+    const connection = getConnection.getConnection();
+    var sql = 'CALL modificarUsuario(?,?,?,?,?,?,?,?,?,?,?)';
+    var value = [
+        usuario.idUsuario,
+        usuario.nombres,
+        usuario.apellidoPat,
+        usuario.apellidoMat,
+        usuario.dni,
+        usuario.email,
+        usuario.telefono,
+        usuario.contrasenia,
+        usuario.Perfil_idPerfil,
+        usuario.estado,
+        JSON.stringify(usuario.fundos)
+    ];
+    connection.query(sql, value, function (error, results) {
+        if (error) {
+            console.error("Error in query: ", error);
+            result(error, null);
+            return;
+        }
+        result(null, results);
+    });
+}
+
+Usuario.eliminarUsuario = (usuario, result) => {
+    const connection = getConnection.getConnection();
+    var sql = 'CALL eliminarUsuario(?)';
+    var value = [
+        usuario.idUsuario
+    ];
+    connection.query(sql, value, function (error, results) {
+        if (error) {
+            console.error("Error in query: ", error);
+            result(error, null);
+            return;
+        }
+        result(null, results);
+    });
+}
 
 Usuario.listarUsuario = (usuario, result) => {
     const connection = getConnection.getConnection();
