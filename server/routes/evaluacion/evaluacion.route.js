@@ -8,6 +8,7 @@ evaluacionRouter.post('/listarEvaluacionesXSemana', evaluacionController.evaluac
 evaluacionRouter.post('/listarLastEvaluacionesXSemana', evaluacionController.evaluacionesLastXSemanaListar); //
 evaluacionRouter.post('/listarEvaluacionesXCampaniaXFundo', evaluacionController.evaluacionesXCampañaXFundoListar); //
 evaluacionRouter.post('/listarEvaluacionesXCampania', evaluacionController.evaluacionesXCampañaListar); //
+evaluacionRouter.post('/listarEvaluacionesXCampaniaXUsuario', evaluacionController.evaluacionesXCampañaXUsuarioListar); //
 evaluacionRouter.get('/listarEvaluaciones', evaluacionController.evaluacionesListar);
 evaluacionRouter.get('/listarSemanas', evaluacionController.semanasListar);
 evaluacionRouter.get('/listarGravedades', evaluacionController.gravedadesListar);

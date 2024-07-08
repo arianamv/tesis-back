@@ -124,4 +124,56 @@ Usuario.listarUsuarioXFundo = (usuario, result) => {
     });
 }
 
+Usuario.verificarUsuario = (correo, contrasenia, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL verificarUsuario(?,?)";
+    var value = [
+        correo,
+        contrasenia
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+        return;
+    });
+
+};
+
+Usuario.buscarUsuarioXCorreo = (correo, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL buscarUsuarioXCorreo(?)";
+    var value = [
+        correo
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) {
+            logger.log('error', 'No se pudo enviar la informacion del usuario');
+            result(error, null);
+            return;
+        }
+        result(null, results[0])
+        return;
+    })
+
+}
+
+Usuario.listarPerfiles = (idUsuario, result) => {
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarPerfilRutas(?)";
+    var value = [
+        idUsuario
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) {
+            logger.log('error', 'No se pudo enviar listar los perfiles del usuario ');
+            result(error, null);
+            return;
+
+        }
+        result(null, results[0])
+        return;
+    })
+
+}
+
 module.exports = Usuario;

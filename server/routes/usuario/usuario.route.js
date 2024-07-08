@@ -10,6 +10,7 @@ usuarioRouter.get('/listarEvaluadores', usuarioController.evaluadoresListar); //
 usuarioRouter.post('/insertarUsuario', usuarioController.usuarioInsertar); //
 usuarioRouter.post('/modificarUsuario', usuarioController.usuarioModificar); //
 usuarioRouter.post('/eliminarUsuario', usuarioController.usuarioEliminar); //
+usuarioRouter.post('/login', usuarioController.login); //
 
 
 

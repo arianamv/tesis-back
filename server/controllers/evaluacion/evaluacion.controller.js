@@ -79,6 +79,43 @@ exports.evaluacionesXCampañaListar = async (req, res) => {
     }
 }
 
+exports.evaluacionesXCampañaXUsuarioListar = async (req, res) => {
+    try {
+    db.Evaluacion.listarEvaluacionesXCampañaXUsuario(req,(err,data)=>{
+            if(err){
+                res.json({
+                    success: false,
+                    error: {
+                        "message": err.message
+                    }
+                });
+                return;
+            }
+            console.log(data);
+            if(data==null){
+                res.json({
+                    success: false,
+                    Evaluacion: [],
+                }); 
+                return;
+            }
+            res.json({
+                success: true,
+                Evaluacion: data,
+            }); 
+    }) 
+    } catch (errorTRY) {
+        console.log(errorTRY)
+        res.json({
+            success: false,
+            error: {
+                "message": "Error en el servidor"
+            },
+            "message": "Error en el servidor"
+        });
+    }
+}
+
 exports.evaluacionesLastXSemanaListar = async (req, res) => {
     try {
     db.Evaluacion.listarLastEvaluacionesXSemana(req,(err,data)=>{

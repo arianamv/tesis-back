@@ -203,3 +203,43 @@ exports.usuariosXFundoListar = async (req, res) => {
         });
     }
 }
+
+exports.login = (req, res) => {
+    try {
+    var rpta;
+    console.log(req.body.correo);
+    db.User.verificarUsuario(req.body.correo, req.body.contrasenia, (err, dataUsuario) => {
+        if(err){
+            res.json({
+                success: false,
+                error: {
+                    "message": err.message
+                }
+            });
+            return;
+        }
+        console.log(dataUsuario);
+        if(dataUsuario==null){
+            res.json({
+                success: false,
+                Usuario: [],
+            }); 
+            return;
+        }
+        res.json({
+            success: true,
+            Usuario: dataUsuario,
+        }); 
+    }) 
+    } catch (errorTRY) {
+        console.log(errorTRY)
+        res.json({
+            success: false,
+            error: {
+                "message": "Error en el servidor"
+            },
+            "message": "Error en el servidor"
+        });
+    }
+
+    }

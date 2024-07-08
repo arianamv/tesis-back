@@ -54,6 +54,24 @@ Evaluacion.listarEvaluacionesXCampaña = (evaluacion, result) => {
     });
 }
 
+Evaluacion.listarEvaluacionesXCampañaXUsuario = (evaluacion, result) => {
+    if (/%/.test(evaluacion.body.nombre_id)) {
+        console.log("La cadena contiene el carácter '%'.");
+        result(null)
+        return;
+    } 
+    const connection = getConnection.getConnection();
+    var sql = "CALL listarEvaluacionesXCampañaXUsuario(?,?)";
+    var value = [
+        evaluacion.body.idCampaña,
+        evaluacion.body.idUsuario
+    ];
+    connection.query(sql, value, (error, results) => {
+        if (error) throw error;
+        result(null, results[0])
+    });
+}
+
 Evaluacion.listarLastEvaluacionesXSemana = (evaluacion, result) => {
     if (/%/.test(evaluacion.body.nombre_id)) {
         console.log("La cadena contiene el carácter '%'.");
